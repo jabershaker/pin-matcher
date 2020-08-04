@@ -12,37 +12,39 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text">
-                    <button class="generate-btn">Generate Pin</button>
+                    <input class="form-control" type="text" id="first-input" >
+                    <button class="generate-btn" id="pin-generate">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <form action="" name="pin">
+                    <input class="form-control"type="text" name="screen" id="second-input">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
+                              <div class="button" onclick="pin.screen.value += '7'">7</div>
+                              <div class="button" onclick="pin.screen.value += '8'">8</div>
+                              <div class="button" onclick="pin.screen.value += '9'">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
+                              <div class="button" onclick="pin.screen.value += '4'">4</div>
+                              <div class="button" onclick="pin.screen.value += '5'">5</div>
+                              <div class="button" onclick="pin.screen.value += '6'">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
+                              <div class="button" onclick="pin.screen.value += '1'">1</div>
+                              <div class="button" onclick="pin.screen.value += '2'">2</div>
+                              <div class="button" onclick="pin.screen.value += '3'">3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div class="button"><</div>
-                                <div class="button">0</div>
-                                <div class="button">C</div>
+                                <div class="button"  onclick="pin.screen.value = pin.screen.value.slice(0, -1)"><</div>
+                                <div class="button" onclick="pin.screen.value += '0'">0</div>
+                                <div class="button" onclick="pin.screen.value = ''">C</div>
                             </div>
+                        </form>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
+                                <button type="button"  class="submit-btn" id="submit">Submit</button>
                                 <p class="action-left">3 try left</p>
                             </div>
                     </div>
@@ -50,9 +52,37 @@
             </div>
         </div>
         <div class="notify-section">
-            <p class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+            <p class="notify" id="wrong">❌ Pin Didn't Match, Please try again</p>
+            <p class="notify" id="success">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
+    <script>
+        document.getElementById("pin-generate").addEventListener('click', function(){
+           
+           
+                var generate = document.getElementById("first-input")
+                var number = generate.innerHTML = Math.floor(( 1000 + Math.random() * 9000 ));
+                var pinNumber = document.getElementById("first-input").value = number;     
+               
+        })
+        document.getElementById("submit").addEventListener('click', function(){
+            var pinNumber = document.getElementById("first-input").value; 
+            var secondInput = document.getElementById("second-input").value;
+            if(pinNumber == secondInput){
+
+                let success = document.getElementById("success");
+                    success.style.display = "block"; 
+                  
+            }
+            
+            else{
+
+                let wrong = document.getElementById("wrong");
+                    wrong.style.display = "block";  
+                
+                 }
+            })
+       
+    </script>
 </body>
 </html>
